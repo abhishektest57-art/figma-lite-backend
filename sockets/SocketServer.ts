@@ -24,8 +24,17 @@ const allowedOrigins = [
 
 export function initSocketServer(httpServer: HttpServer) {
   const io = new IOServer(httpServer, {
-    cors: { origin: allowedOrigins, credentials: true },
+    cors: {
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        console.log('❌ Socket.io blocked by CORS:', origin);
+        return callback(new Error('Not allowed by Socket.io CORS'));
+      },
+      credentials: true,
+    },
   });
+
 
   // In-memory last-known canvas hash per design (room). If you run multiple server
   // instances, move this to shared storage (Redis).

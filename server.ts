@@ -23,10 +23,20 @@ const allowedOrigins = [
 ];
 
 app.use(express.json());
+
 app.use(cors({
-  origin: allowedOrigins, // update this if needed for frontend
-  credentials: true
+  origin: (origin, callback) => {
+    // allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    console.log('❌ Blocked by CORS:', origin);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
 }));
+
+// ✅ This must come *before* your routes
+app.options('*', cors()); // handle preflight requests
 
 // Mounting REST routes
 app.use('/api/designs', designRoutes);
