@@ -17,8 +17,9 @@ function hashString(s: string) {
 }
 
 const allowedOrigins = [
-  'http://localhost:5173',              // local dev
-  'https://figma-lite.netlify.app'      // production frontend
+  'http://localhost:5173',
+  'https://figma-lite.netlify.app',
+  'https://stalwart-fenglisu-aabfda.netlify.app/'
 ];
 
 export function initSocketServer(httpServer: HttpServer) {
