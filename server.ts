@@ -54,8 +54,9 @@ mongoose.connect(MONGO_URL, { dbName: 'figma_like' })
     console.log('MongoDB connected');
     // Start Socket.io after DB is up
     initSocketServer(httpServer);
+    // ✅ Bind to all interfaces, not localhost
     httpServer.listen(PORT, () => {
-      console.log(`Server running with Socket.io at http://localhost:${PORT}`);
+      console.log(`✅ Server running with Socket.io on port ${PORT}`);
     });
   })
   .catch((err) => {
