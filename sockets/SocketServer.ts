@@ -16,9 +16,14 @@ function hashString(s: string) {
   return (hash >>> 0).toString(36);
 }
 
+const allowedOrigins = [
+  'http://localhost:5173',              // local dev
+  'https://figma-lite.netlify.app'      // production frontend
+];
+
 export function initSocketServer(httpServer: HttpServer) {
   const io = new IOServer(httpServer, {
-    cors: { origin: 'http://localhost:5173', credentials: true },
+    cors: { origin: allowedOrigins, credentials: true },
   });
 
   // In-memory last-known canvas hash per design (room). If you run multiple server

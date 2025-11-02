@@ -16,9 +16,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  'http://localhost:5173',              // local dev
+  'https://figma-lite.netlify.app'      // production frontend
+];
+
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // update this if needed for frontend
+  origin: allowedOrigins, // update this if needed for frontend
   credentials: true
 }));
 
