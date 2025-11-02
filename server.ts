@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:5173',
   'https://figma-lite.netlify.app',
-  'https://stalwart-fenglisu-aabfda.netlify.app/'
+  'https://stalwart-fenglisu-aabfda.netlify.app'
 ];
 
 app.use(express.json());
