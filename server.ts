@@ -37,7 +37,7 @@ app.use(cors({
 
 // ✅ This must come *before* your routes
 // app.options('/*', cors());
-app.options(/.*/, cors());
+// app.options(/.*/, cors());
 
 // Mounting REST routes
 app.use('/api/designs', designRoutes);
